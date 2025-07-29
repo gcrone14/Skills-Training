@@ -1,0 +1,32 @@
+---
+title: "Practicing RMarkdown with Github"
+author: "Gabriel Crone"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+This is a document practicing uploading changes from RMarkdown to Github. Please enjoy the animation below.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(gganimate)
+library(transformr)
+library(tidyverse)
+
+# Create a data set
+df <- data.frame(
+  x = seq(0, 2 * pi, length.out = 100)
+) %>%
+  mutate(y = sin(x), frame = x)
+
+# Plot and animate
+p <- ggplot(df, aes(x, y)) +
+  geom_line(color = "gray80") +
+  geom_point(color = "red", size = 4) +
+  labs(title = "Sine Wave Animation", x = "x", y = "sin(x)") +
+  transition_reveal(x)  # Animate over x values
+
+# Render animation
+animate(p, duration = 4, fps = 20, width = 600, height = 400, renderer = gifski_renderer())
+```
+
