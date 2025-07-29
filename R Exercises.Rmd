@@ -1,0 +1,177 @@
+---
+title: "R Exercises"
+author: "Gabriel Crone"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+This document compiles my solutions from the R exercises from a book by Grinberg & Reed's "Programming Exercises for R."
+
+# Part 1: Vectors
+## 1.
+```{r 1.1, name = "my_chunk"}
+# a)
+1:20
+
+# b)
+20:1
+
+# c)
+c(1:20, 19:1) # OR c(1:19, 20:1)
+
+# d)
+tmp <- c(4, 6, 3)
+
+# e)
+rep(tmp, 10)
+
+# f)
+c(rep(tmp, 10), 4)
+
+# g)
+c(
+  rep(4,10),
+  rep(6, 20),
+  rep(3, 30)
+)
+```
+
+## 2.
+```{r 1.2}
+seq <- seq(3, 6, 0.1)
+exp(seq) * cos(seq)
+
+```
+
+## 3.
+```{r 1.3}
+# a)
+exp1 <- seq(3,36,3)
+exp2 <- seq(1, 34, 3)
+(0.1^exp1)*(0.2^exp2)
+
+# b)
+num <- 2^(1:25)
+denom <- 1:25
+num/denom
+```
+
+## 4.
+Note that `i` as a name for index cannot be used, since it's already an identified object in R.
+
+```{r 1.4}
+# a)
+index <- 10:100
+sum(index^3 + 4*index^2)
+
+# OR as for loop
+vec <- c()
+for(i in 10:100) {
+  vec[i - 9] <- i^3 + 4*i^2
+}
+sum(vec)
+
+# b) 
+index <- 1:25
+sum(
+  ((2^index)/index) + (3^index)/(index^2)
+)
+
+# OR with for loop
+vec <- c()
+for(i in 1:25) {
+  vec[i] <- ((2^i)/i) + ((3^i)/(i^2))
+}
+sum(vec)
+```
+
+## 5.
+```{r 1.5}
+# a)
+paste("label", 1:30)
+
+# b)
+paste0("fn", 1:30)
+```
+
+## 6.
+```{r 1.6}
+# Setup
+set.seed(50)
+xVec <- sample(0:999, 250, replace=T)
+yVec <- sample(0:999, 250, replace=T)
+
+# a)
+yVec[-1]-xVec[-length(xVec)]
+
+# b)
+sin(yVec[-length(yVec)])/cos(xVec[-1])
+
+# c)
+# Shortcut to using base R is using head and 
+# -number, where number is number of values
+# to "snip" off from the end.
+head(xVec, -2) + 2*head(xVec, -1)[-1] + -1*xVec[-(1:2)]
+
+
+# d)
+exp(-xVec[-1]) / (head(xVec, -1) + 10)
+
+```
+
+## 7.
+Tip 1: `which({condition})` returns the position values of the vector for which the condition specified is TRUE. With those values, need to index them in with `[]`.
+
+Tip 2: The `order()` function returns the indices of an ordered vector, allowing you to use indices in rearranging of other vector (e.g., in part g).
+
+
+```{r 1.7}
+# a)
+yVec[which(yVec > 600)]
+
+# b)
+which(yVec > 600)
+
+# c)
+xVec[which(yVec > 600)]
+
+# d)
+sqrt(abs(xVec - mean(xVec)))
+
+# Now is a good place to use pipes
+# (makes it more readable)
+(xVec - mean(xVec)) |>
+  abs() |>
+  sqrt()
+
+# e)
+sum(
+  # Returns TRUE if condition met per element
+  # and FALSE otherwise.
+  yVec <= max(yVec) & 
+  yVec > max(yVec)-200
+)
+
+# f)
+sum(xVec %% 2)
+
+# g)
+xVec[order(yVec)]
+
+# h)
+yVec[seq(1, length(yVec), 3)]
+```
+
+## 8.
+It's important to recognize that a) the numerators of each are all even numbers (and 1) up to 38, and b) the denominators are all odd numbers up to 39.
+
+```{r 1.8}
+num <- c(1, seq(2, 38, 2))
+denom <- seq(1, 39, 2)
+cumprod(num/denom)
+```
+
+# Part 2: Matrices
+
+
+
