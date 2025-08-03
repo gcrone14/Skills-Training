@@ -1,14 +1,27 @@
 Practicing RMarkdown with Github
 ================
 Gabriel Crone
-2025-07-29
+2025-08-03
 
 This is a document practicing uploading changes from RMarkdown to
 Github. Please enjoy the plot below.
 
 ``` r
 library(tidyverse)
+```
 
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+    ## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.1.0     
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
 # Face
 face <- data.frame(x = 0, y = 0)
 
@@ -45,5 +58,11 @@ ggplot() +
   coord_fixed() +
   theme_void()
 ```
+
+    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+    ## ℹ Please use `linewidth` instead.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
 
 ![](Practicing_RMarkdown_with_Github_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
